@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Primer Análisis</title>
+		<script type="text/javascript" src="d3/d3.v4.js"></script>
+		<style type="text/css">
+
+			rect:hover{
+          fill:orange;
+      }
+
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+      var dataset;
+
+      var rowConverter = function(d){
+        return {
+          PassengerId: parseInt(d.PassengerId),
+          Survived: parseInt(d.Survived),
+          Pclass: parseInt(d.Pclass),
+          Name: d.Name,
+          Sex: d.Sex,
+          Age: parseFloat(d.Age),
+          SibSp: parseInt(d.SibSp),
+          Parch: parseInt(d.Parch),
+          Ticket: d.Ticket,
+          Fare: parseFloat(d.Fare),
+          Cabin: d.Cabin,
+          Embarked: d.Embarked
+        };
+      }
+
+			d3.csv("train.csv", rowConverter, function(data){
+        dataset = data;
+
+        var w = 1000;
+        var h = 100;
+
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+        var rect = svg.selectAll("rect")
+          .data(dataset)
+          .enter()
+          .append("rect");
+
+        rect.attr("x", function(d, i){
+                  return i * 21;
+                  })
+            .attr("y", function(d, i){
+                  return h - d.Age;
+                  })
+            .attr("width", 20)
+            .attr("height", function(d){
+                  return d.Age;
+                  })
+            .attr("fill", function(d){
+                  return "rgb(0, 0, "+ Math.round(d.Age*10) +")";
+                  });
+
+      });
+
+		</script>
+	</body>
+</html>
