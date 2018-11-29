@@ -21,34 +21,44 @@
           se obtienen cada 2 segundos por lo que el histograma se está actualizando
           constantemente.</p>
 
-        <p>NOTA: Hace falta revisar el ancho de las barras (en particular las barras de
-          los extremos). También hace falta poner el histograma en el lado derecho
+        <p>NOTA: Hace falta poner el histograma en el lado derecho
           de la página y hacer la página responsiva a dispositivos móbiles.</p>
       </div>
       <div id="grafica">
         <script>
           var color = "#42300f";
 
+          mean = 20
+          stdDev = 5
+          function update_xValues() {
+                    xSteps = stdDev * 4 * 2; // We want to generate 4 standard deviations to each side of the mean
+                    xDomain = [Math.floor(mean - xSteps / 2), Math.ceil(mean + xSteps / 2)];
+          }
+          update_xValues();
+
           // Generate a 1000 data points using normal distribution with mean=20, deviation=5
-          var values = d3.range(1000).map(d3.randomNormal(20, 5));
+          var values = d3.range(1000).map(function(){
+            var a = d3.randomNormal(mean, stdDev);
+            return Math.round(a());
+          });
 
           // A formatter for counts.
           var formatCount = d3.format(",.0f");
 
-          var margin = {top: 20, right: 30, bottom: 30, left: 30},
-              width = 600 - margin.left - margin.right,
+          var margin = {top: 40, right: 30, bottom: 30, left: 30},
+              width = 750 - margin.left - margin.right,
               height = 500 - margin.top - margin.bottom;
 
           var max = d3.max(values);
           var min = d3.min(values);
           var x = d3.scaleLinear()
                 .rangeRound([0, width])
-                .domain([min, max]);
+                .domain(xDomain);
 
           // Generate a histogram using twenty uniformly-spaced bins.
           var data = d3.histogram()
-              .domain(x.domain())
-              .thresholds(x.ticks(20))
+              .domain(xDomain)
+              .thresholds(21)
               (values);
 
           var yMax = d3.max(data, function(d){return d.length});
@@ -83,9 +93,9 @@
               .attr("fill", function(d) { return colorScale(d.length) });
 
           bar.append("text")
-              .attr("dy", ".75em")
-              .attr("y", -15)
-              .attr("x", (x(data[1].x1) - x(data[1].x0)) / 2)
+              .attr("dy", ".5em")
+              .attr("y", -12)
+              .attr("x", (x(data[1].x1) - x(data[1].x0)) / 2.3)
               .attr("text-anchor", "middle")
               .text(function(d) { return formatCount(d.length); });
 
@@ -96,8 +106,8 @@
 
           function refresh(values){
             var data = d3.histogram()
-                .domain(x.domain())
-                .thresholds(x.ticks(20))
+                .domain(xDomain)
+                .thresholds(21)
                 (values);
 
             // Reset y-domain

@@ -1,11 +1,15 @@
 .bar text {
-  fill: #999999;
+  fill: #303030;
 }
 
 .axis path, .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.bar rect:hover {
+  fill: #b2b565;
 }
 
 #container {
