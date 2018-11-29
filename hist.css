@@ -7,3 +7,16 @@
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#descripcion {
+  width: 50%;
+}
+
+#grafica {
+  width: 50%;
+}

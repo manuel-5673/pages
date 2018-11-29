@@ -5,28 +5,29 @@ html, body {
 
 html {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   line-height: 1.5;
 }
 
 body {
   color: #303030;
-  background-color: #DDDDDD;
+  background-color: #E8E8E8;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
-  color: #DDDDDD;
   margin: 0px;
   padding: 0px;
 }
 
 h2, h3, h4, h5, h6 {
   line-height: 1.25;
+  color: #303030;
 }
 
 h1 {
   line-height: 80px;
+  color:#E8E8E8;
 }
 
 header {
@@ -36,11 +37,12 @@ header {
   background-color: #17471C;
 }
 
-section::first-letter {
-  font-size: 30px;
+section div::first-letter {
+  font-size: 32px;
 }
 
 section{
   padding-left: 30px;
   padding-right: 30px;
+  width: 80%;
 }
