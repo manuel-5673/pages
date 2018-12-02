@@ -2,79 +2,85 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Primer Análisis</title>
-		<link rel="stylesheet" href="estilo.css">
+		<title>Análisis Exploratorio del Titanic Competition</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		<link rel="stylesheet" href="estilo.css">
 		<script type="text/javascript" src="d3/d3.v4.js"></script>
-		<style type="text/css">
-
-			rect:hover{
-          fill:orange;
-      }
-
-		</style>
 	</head>
 	<body>
-		<h1>Titanic competition</h1>
-		<p>El analisis explorativo de datos se hace con el conjunto de datos de
-			entrenamiento. Los datos de entrenamiento consisten de la informacion de
-			891 personas. No se capturó la edad, el número de camarote y el puerto de
-			abordaje de algunas personas, no obstante, aún podemos obtener informacion
-			valiosa de los datos que sí se capturaron. En el Cuadro 1 se muestran las
-			primeras entradas del conjunto de datos de entrenamiento</p>
-		<script type="text/javascript">
+		<header>
+			<a href="/">Regresar</a>
+			<h1>Titanic competition</h1>
+		</header>
+		<section>
+			<div class="container-flat">
+				<div class="row">
+						<div class="col-lg-5">
+							<p>El analisis exploratorio de datos se hace con el conjunto de datos de
+								entrenamiento. Los datos de entrenamiento consisten de la informacion de
+								891 personas. No se capturó la edad, el número de camarote y el puerto de
+								abordaje de algunas personas, no obstante, aún podemos obtener informacion
+								valiosa de los datos que sí se capturaron. En el Cuadro 1 se muestran las
+								primeras entradas del conjunto de datos de entrenamiento</p>
+						</div>
+						<div class="col-lg-7" id="grafica">
+							<script type="text/javascript">
 
-      var dataset;
+								var dataset;
 
-      var rowConverter = function(d){
-        return {
-          PassengerId: parseInt(d.PassengerId),
-          Survived: parseInt(d.Survived),
-          Pclass: parseInt(d.Pclass),
-          Name: d.Name,
-          Sex: d.Sex,
-          Age: parseFloat(d.Age),
-          SibSp: parseInt(d.SibSp),
-          Parch: parseInt(d.Parch),
-          Ticket: d.Ticket,
-          Fare: parseFloat(d.Fare),
-          Cabin: d.Cabin,
-          Embarked: d.Embarked
-        };
-      }
+								var rowConverter = function(d){
+									return {
+										PassengerId: parseInt(d.PassengerId),
+										Survived: parseInt(d.Survived),
+										Pclass: parseInt(d.Pclass),
+										Name: d.Name,
+										Sex: d.Sex,
+										Age: parseFloat(d.Age),
+										SibSp: parseInt(d.SibSp),
+										Parch: parseInt(d.Parch),
+										Ticket: d.Ticket,
+										Fare: parseFloat(d.Fare),
+										Cabin: d.Cabin,
+										Embarked: d.Embarked
+									};
+								}
 
-			d3.csv("train.csv", rowConverter, function(data){
-        dataset = data;
+								d3.csv("train.csv", rowConverter, function(data){
+									dataset = data;
 
-        var w = 1000;
-        var h = 100;
+									var w = 1000;
+									var h = 100;
 
-        var svg = d3.select("body")
-                    .append("svg")
-                    .attr("width", w)
-                    .attr("height", h);
+									var svg = d3.select("#grafica")
+															.append("svg")
+															.attr("width", w)
+															.attr("height", h);
 
-        var rect = svg.selectAll("rect")
-          .data(dataset)
-          .enter()
-          .append("rect");
+									var rect = svg.selectAll("rect")
+										.data(dataset)
+										.enter()
+										.append("rect");
 
-        rect.attr("x", function(d, i){
-                  return i * 21;
-                  })
-            .attr("y", function(d, i){
-                  return h - d.Age;
-                  })
-            .attr("width", 20)
-            .attr("height", function(d){
-                  return d.Age;
-                  })
-            .attr("fill", function(d){
-                  return "rgb(0, 0, "+ Math.round(d.Age*10) +")";
-                  });
+									rect.attr("x", function(d, i){
+														return i * 21;
+														})
+											.attr("y", function(d, i){
+														return h - d.Age;
+														})
+											.attr("width", 20)
+											.attr("height", function(d){
+														return d.Age;
+														})
+											.attr("fill", function(d){
+														return "rgb(0, 0, "+ Math.round(d.Age*10) +")";
+														});
 
-      });
+								});
 
-		</script>
+							</script>
+						</div>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
