@@ -12,142 +12,144 @@
   </head>
   <body>
     <header>
-      <h1>Muestras de una distribución normal</h1>
+      <a href="/">Regresar</a>
+      <h1>Muestras de la distribución normal</h1>
     </header>
     <section>
-    <div id="container">
-      <div id="descripcion">
-        <p>En esta práctica se obtienen muestras de 1000 elementos que siguen una
-          distribución normal con \( \mu = 20 \) y \( \sigma = 5 \). Las muestras
-          se obtienen cada 2 segundos por lo que el histograma se está actualizando
-          constantemente.</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-5">
+          <p>En esta práctica se obtienen muestras de 1000 elementos que siguen una
+            distribución normal con \( \mu = 20 \) y \( \sigma = 5 \). Las muestras
+            se obtienen cada 2 segundos por lo que el histograma se está actualizando
+            constantemente.</p>
+        </div>
+        <div class="col-lg-7">
+          <div id="grafica">
+            <script>
+              var color = "#42300f";
 
-        <p>NOTA: Hace falta poner el histograma en el lado derecho
-          de la página y hacer la página responsiva a dispositivos móbiles.</p>
-      </div>
-      <div id="grafica">
-        <script>
-          var color = "#42300f";
+              mean = 20
+              stdDev = 5
+              function update_xValues() {
+                        xSteps = stdDev * 4 * 2; // We want to generate 4 standard deviations to each side of the mean
+                        xDomain = [Math.floor(mean - xSteps / 2), Math.ceil(mean + xSteps / 2)];
+              }
+              update_xValues();
 
-          mean = 20
-          stdDev = 5
-          function update_xValues() {
-                    xSteps = stdDev * 4 * 2; // We want to generate 4 standard deviations to each side of the mean
-                    xDomain = [Math.floor(mean - xSteps / 2), Math.ceil(mean + xSteps / 2)];
-          }
-          update_xValues();
+              // Generate a 1000 data points using normal distribution with mean=20, deviation=5
+              var values = d3.range(1000).map(function(){
+                var a = d3.randomNormal(mean, stdDev);
+                return Math.round(a());
+              });
 
-          // Generate a 1000 data points using normal distribution with mean=20, deviation=5
-          var values = d3.range(1000).map(function(){
-            var a = d3.randomNormal(mean, stdDev);
-            return Math.round(a());
-          });
+              // A formatter for counts.
+              var formatCount = d3.format(",.0f");
 
-          // A formatter for counts.
-          var formatCount = d3.format(",.0f");
+              var margin = {top: 40, right: 30, bottom: 30, left: 30},
+                  width = 750 - margin.left - margin.right,
+                  height = 500 - margin.top - margin.bottom;
 
-          var margin = {top: 40, right: 30, bottom: 30, left: 30},
-              width = 750 - margin.left - margin.right,
-              height = 500 - margin.top - margin.bottom;
+              var max = d3.max(values);
+              var min = d3.min(values);
+              var x = d3.scaleLinear()
+                    .rangeRound([0, width])
+                    .domain(xDomain);
 
-          var max = d3.max(values);
-          var min = d3.min(values);
-          var x = d3.scaleLinear()
-                .rangeRound([0, width])
-                .domain(xDomain);
+              // Generate a histogram using twenty uniformly-spaced bins.
+              var data = d3.histogram()
+                  .domain(xDomain)
+                  .thresholds(21)
+                  (values);
 
-          // Generate a histogram using twenty uniformly-spaced bins.
-          var data = d3.histogram()
-              .domain(xDomain)
-              .thresholds(21)
-              (values);
+              var yMax = d3.max(data, function(d){return d.length});
+              var yMin = d3.min(data, function(d){return d.length});
+              var colorScale = d3.scaleLinear()
+                          .domain([yMin, yMax])
+                          .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
 
-          var yMax = d3.max(data, function(d){return d.length});
-          var yMin = d3.min(data, function(d){return d.length});
-          var colorScale = d3.scaleLinear()
-                      .domain([yMin, yMax])
-                      .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+              var y = d3.scaleLinear()
+                  .domain([0, yMax])
+                  .range([height, 0]);
 
-          var y = d3.scaleLinear()
-              .domain([0, yMax])
-              .range([height, 0]);
+              var xAxis = d3.axisBottom()
+                  .scale(x);
 
-          var xAxis = d3.axisBottom()
-              .scale(x);
+              var svg = d3.select("#grafica").append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-          var svg = d3.select("#grafica").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              var bar = svg.selectAll(".bar")
+                  .data(data)
+                  .enter().append("g")
+                  .attr("class", "bar")
+                  .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
 
-          var bar = svg.selectAll(".bar")
-              .data(data)
-              .enter().append("g")
-              .attr("class", "bar")
-              .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
+              bar.append("rect")
+                  .attr("x", 1)
+                  .attr("width", x(data[1].x1) - x(data[1].x0) - 2)
+                  .attr("height", function(d) { return height - y(d.length); })
+                  .attr("fill", function(d) { return colorScale(d.length) });
 
-          bar.append("rect")
-              .attr("x", 1)
-              .attr("width", x(data[1].x1) - x(data[1].x0) - 2)
-              .attr("height", function(d) { return height - y(d.length); })
-              .attr("fill", function(d) { return colorScale(d.length) });
+              bar.append("text")
+                  .attr("dy", ".5em")
+                  .attr("y", -12)
+                  .attr("x", (x(data[1].x1) - x(data[1].x0)) / 2.3)
+                  .attr("text-anchor", "middle")
+                  .text(function(d) { return formatCount(d.length); });
 
-          bar.append("text")
-              .attr("dy", ".5em")
-              .attr("y", -12)
-              .attr("x", (x(data[1].x1) - x(data[1].x0)) / 2.3)
-              .attr("text-anchor", "middle")
-              .text(function(d) { return formatCount(d.length); });
+              svg.append("g")
+                  .attr("class", "x axis")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(xAxis);
 
-          svg.append("g")
-              .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
-              .call(xAxis);
+              function refresh(values){
+                var data = d3.histogram()
+                    .domain(xDomain)
+                    .thresholds(21)
+                    (values);
 
-          function refresh(values){
-            var data = d3.histogram()
-                .domain(xDomain)
-                .thresholds(21)
-                (values);
+                // Reset y-domain
+                var yMax = d3.max(data, function(d){return d.length});
+                var yMin = d3.min(data, function(d){return d.length});
+                y.domain([0, yMax]);
+                var colorScale = d3.scaleLinear()
+                            .domain([yMin, yMax])
+                            .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
 
-            // Reset y-domain
-            var yMax = d3.max(data, function(d){return d.length});
-            var yMin = d3.min(data, function(d){return d.length});
-            y.domain([0, yMax]);
-            var colorScale = d3.scaleLinear()
-                        .domain([yMin, yMax])
-                        .range([d3.rgb(color).brighter(), d3.rgb(color).darker()]);
+                var bar = svg.selectAll(".bar").data(data);
 
-            var bar = svg.selectAll(".bar").data(data);
+                // Remove
+                bar.exit().remove();
 
-            // Remove
-            bar.exit().remove();
+                bar.transition()
+                  .duration(1000)
+                  .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
 
-            bar.transition()
-              .duration(1000)
-              .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
+                bar.select("rect")
+                    .transition()
+                    .duration(1000)
+                    .attr("height", function(d) { return height - y(d.length); })
+                    .attr("fill", function(d) { return colorScale(d.length) });
 
-            bar.select("rect")
-                .transition()
-                .duration(1000)
-                .attr("height", function(d) { return height - y(d.length); })
-                .attr("fill", function(d) { return colorScale(d.length) });
+                bar.select("text")
+                    .transition()
+                    .duration(1000)
+                    .text(function(d) { return formatCount(d.length); });
 
-            bar.select("text")
-                .transition()
-                .duration(1000)
-                .text(function(d) { return formatCount(d.length); });
+              }
 
-          }
+              // Refreshing repeatedly.
+              setInterval(function() {
+                var values = d3.range(1000).map(d3.randomNormal(20, 5));
+                refresh(values);
+              }, 2000);
 
-          // Refreshing repeatedly.
-          setInterval(function() {
-            var values = d3.range(1000).map(d3.randomNormal(20, 5));
-            refresh(values);
-          }, 2000);
-
-        </script>
+            </script>
+          </div>
+        </div>
       </div>
     </div>
     </section>

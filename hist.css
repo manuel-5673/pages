@@ -1,5 +1,5 @@
 .bar text {
-  fill: #303030;
+  fill: #202020;
 }
 
 .axis path, .axis line {
@@ -10,17 +10,4 @@
 
 .bar rect:hover {
   fill: #b2b565;
-}
-
-#container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#descripcion {
-  width: 50%;
-}
-
-#grafica {
-  width: 50%;
 }
