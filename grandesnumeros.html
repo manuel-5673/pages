@@ -76,7 +76,19 @@
           </p>
           <p>En otras palabras,</p>
         </div>
-        <div id="grafica" class="col-lg-7">
+        <div class="col-lg-7">
+          <div id="variables">
+            <label>Sample:</label>
+            <input type="number" class="variable" id="numDataPoints" placeholder="n = 100" fun="dataPoints = update_dataPoints(true);">
+            <input type="number" class="variable" id="normalMean" placeholder="μ = 0">
+            <input type="number" class="variable" id="normalStdDev" placeholder="σ = 3">
+            </br>
+            </br>
+            <label>Speed:</label>
+            <input type="number" class="variable" id="i_step" placeholder="1 / i">
+            <input type="number" class="variable" id="updateDelay" placeholder="500 ms">
+          </div>
+          <div id="grafica"></div>
           <script>
               (function () {
 
@@ -756,17 +768,6 @@
 
                 })()
           </script>
-          </div>
-        <div id="variables">
-          <label>Sample:</label>
-          <input type="number" class="variable" id="numDataPoints" placeholder="n = 100" fun="dataPoints = update_dataPoints(true);">
-          <input type="number" class="variable" id="normalMean" placeholder="μ = 0">
-          <input type="number" class="variable" id="normalStdDev" placeholder="σ = 3">
-          </br>
-          </br>
-          <label>Speed:</label>
-          <input type="number" class="variable" id="i_step" placeholder="1 / i">
-          <input type="number" class="variable" id="updateDelay" placeholder="500 ms">
         </div>
       </div>
     </div>
