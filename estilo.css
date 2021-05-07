@@ -52,7 +52,8 @@ ul.topnav li a {
   font-size: 14px;
 }
 
-ul.topnav li a:hover {background-color: #9da5b4;
+ul.topnav li a:hover {
+  background-color: #9da5b4;
   color: #1e1e1e;
 }
 
@@ -80,4 +81,14 @@ section div::first-letter {
 section{
   padding-left: 20px;
   padding-right: 20px;
+}
+
+
+div.construction{
+  margin-top:70px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #303030;
+  text-align: center;
+  font-size: 32px;
 }
