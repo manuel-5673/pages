@@ -1,9 +1,8 @@
 html {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
 }
-
 
 /* Colors
     very dark gray: #1e1e1e (colab cells)
@@ -28,7 +27,7 @@ h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  color:#E8E8E8;
+  color:#f5f5f5;
 }
 
 ul.topnav {
@@ -57,7 +56,6 @@ ul.topnav li a:hover {
   color: #1e1e1e;
 }
 
-
 ul.topnav li a.active {
   background-color: #a81e1e;
   color:#f5f5f5;
@@ -73,16 +71,60 @@ ul.topnav li a.main {
   background-color: #910d0d
 }
 
-
-section div::first-letter {
+/*section div::first-letter {
   font-size: 32px;
-}
+}*/
 
 section{
   padding-left: 20px;
   padding-right: 20px;
 }
 
+div.photo-cover{
+  text-align: center;
+}
+
+div.main-container{
+  margin-top:80px;
+}
+
+div.top-cv-container{
+  margin-top:60px;
+}
+
+div.top-cv-list{
+  font-weight: bold;
+}
+
+div.top-cv-list > p{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+
+div.text-container{
+  padding-left: 40px;
+}
+
+img.profile-picture{
+  border: 30px solid #3f3f3f;
+}
+
+#name-cv{
+  text-align: center;
+  font-size: 32px;
+  padding-bottom: 20px;
+}
+
+#cv-body{
+  font-size: 16px;
+}
+
+p.subtitle-cv{
+  font-size: 24px;
+  border-bottom: 2px solid #3f3f3f;
+  margin-bottom: 10px;
+}
 
 div.construction{
   margin-top:70px;
