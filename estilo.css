@@ -21,14 +21,18 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0px;
 }
 
-h2, h3, h4, h5, h6 {
-  line-height: 1.25;
-  color: #202020;
-}
-
 h1 {
   color:#f5f5f5;
 }
+
+a{
+  color:#3b23c4;
+}
+
+a:hover{
+  color:#3b23c4;
+}
+
 
 ul.topnav {
   list-style-type: none;
@@ -80,6 +84,11 @@ section{
   padding-right: 20px;
 }
 
+span.hola{
+  font-size: 24px;
+}
+
+
 div.photo-cover{
   text-align: center;
 }
@@ -96,14 +105,35 @@ div.top-cv-list{
   font-weight: bold;
 }
 
+div.top-cv-date{
+  text-align: right;
+  margin-bottom: -5px;
+}
+
 div.top-cv-list > p{
+  padding-top: 0px;
+  margin-top: 0px;
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
 
+p.little-note{
+  margin-bottom: 0px;
+}
+
+p.language{
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+div.top-cv-date > p{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
 
 div.text-container{
-  padding-left: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 img.profile-picture{
