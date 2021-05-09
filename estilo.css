@@ -26,11 +26,11 @@ h1 {
 }
 
 a{
-  color:#3b23c4;
+  color:#828aff;
 }
 
 a:hover{
-  color:#3b23c4;
+  color:#8f8fff;
 }
 
 
@@ -94,7 +94,7 @@ div.photo-cover{
 }
 
 div.main-container{
-  margin-top:80px;
+  margin-top:70px;
 }
 
 div.top-cv-container{
@@ -157,7 +157,6 @@ p.subtitle-cv{
 }
 
 div.construction{
-  margin-top:70px;
   padding-top: 25px;
   padding-bottom: 25px;
   background-color: #303030;
