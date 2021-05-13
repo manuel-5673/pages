@@ -16,14 +16,10 @@ body {
   background-color: #1e1e1e;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
   margin: 0px;
   padding: 0px;
-}
-
-h1 {
-  color:#f5f5f5;
-}
+}*/
 
 a{
   color:#828aff;
@@ -97,6 +93,15 @@ div.main-container{
   margin-top:70px;
 }
 
+div.ESL-container{
+  margin-top:20px;
+}
+
+div.ESL-title{
+  text-align: center;
+}
+
+
 div.top-cv-container{
   margin-top:60px;
 }
@@ -155,6 +160,21 @@ p.subtitle-cv{
   border-bottom: 2px solid #3f3f3f;
   margin-bottom: 10px;
 }
+
+h1{
+  border-bottom: 2px solid #3f3f3f;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+h3{
+  font-size: 24px;
+  border-bottom: 2px solid #3f3f3f;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
 
 div.construction{
   padding-top: 25px;
