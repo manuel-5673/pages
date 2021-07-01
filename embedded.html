@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard testing | Manuel Sánchez</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://unpkg.com/amazon-quicksight-embedding-sdk@1.0.15/dist/quicksight-embedding-js-sdk.min.js"></script>
+    <script type="text/javascript">
+        var dashboard;
+
+        function embedDashboard() {
+            var containerDiv = document.getElementById("embeddingContainer");
+            var options = {
+                // replace this dummy url with the one generated via embedding API
+                url: "https://us-east-1.quicksight.aws.amazon.com/embed/11d98864cd9e40f89662ed8f89beda04/dashboards/b6b029a2-3203-44fc-910f-ae6371782253?isauthcode=true&identityprovider=quicksight&code=AYABeGXiFJm81LfNGmh1IS8w6jwAAAABAAdhd3Mta21zAEthcm46YXdzOmttczp1cy1lYXN0LTE6MjU5NDgwNDYyMTMyOmtleS81NGYwMjdiYy03MDJhLTQxY2YtYmViNS0xNDViOTExNzFkYzMAuAECAQB4ZGLViwIvMWeq0eg2SdOyWJS86qkEBfgLEiY79AhlHtMByf9f3zd1uXV0Sx-iG4kDgAAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDOauQiWf1A6Q_IXcsQIBEIA7kqO0Vs6aoWlYSNv51X6_diBJdR0ULVffzsFCL9Kirhgz_y_CJDgRSBw58Cw0FV7XHUKcDuzVJ7sI4F8CAAAAAAwAABAAAAAAAAAAAAAAAAAANYN5vS4AEmGWR3Gpm7wFoP____8AAAABAAAAAAAAAAAAAAABAAAAnqSFSjKYAw0-lZAzsgpHe-1t-PWVdZoCpHdtkKyHatKo4eftcAA8nbxfp-F-3y9Y3-rNq2Ozy56OghhbAZ0E2DUWxlgX6G54j7wYhM-WKdEwyb9Y4o_dwmE1CSfB-a5Jf-OsSYYb0h3cUiEnVH_77k3ZFm1f49NAFmgfk2yZUncBvzwRayN4Hjzp2iDnCs9qGX2BqxBMs9KSRU8Jes-DBFUkcXevRrwwcSGp6vNVzg%3D%3D",
+                container: containerDiv,
+                scrolling: "no",
+                height: "700px",
+                width: "100%",
+                footerPaddingEnabled: true
+            };
+            dashboard = QuickSightEmbedding.embedDashboard(options);
+        }
+    </script>
+  </head>
+  <body id="cv-body" onload="embedDashboard()">
+  <ul id="as" class="topnav">
+    <li><a class="main" href="embedded.html">Manuel Sánchez</a></li>
+    <li><a href="embedded.html">Current Projects</a></li>
+    <li><a href="embedded.html">Curriculum</a></li>
+    <li><a href="embedded.html">Portfolio</a></li>
+    <li><a href="embedded.html">Resources</a></li>
+    <li><a href="embedded.html">Contact</a></li>
+  </ul>
+
+  <div class="container-fluid top-cv-container">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div id="embeddingContainer">
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+
+  </body>
+</html>
